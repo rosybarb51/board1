@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게시글 상세보기</title>
+
+<link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+
+<script src="/js/jquery-3.5.1.js" th:src="@{/js/jquery-3.5.1.js}"></script>
+<script src="/js/popper.js" th:src="@{/js/popper.js}"></script>
+<script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+
+	<script>
+	$(document).ready(function() {
+		/* 목록으로 버튼 클릭 시 목록으로 이동 */
+		$("#btnList").on("click", function() {
+			/* 자바스크립트의 location을 사용하여 페이지 이동 */
+			location.href = "openBoardList.do";
+		});
+		
+		/* 수정하기 버튼 클릭 시 Controller의 updateBoard.do 로 이동 */
+		$("#btnEdit").on("click", function() {
+			/* html 태그의 form 태그를 호출하여 action 속성 값을 변경하고 서버로 데이터 전송 */
+			var frm = $("#frm")[0];
+			frm.action = "updateBoard.do";
+			frm.submit();
+		});
+		
+		/* 삭제하기 버튼 클릭 시 Controller의 deleteBoard.do 로 이동 */
+		$("#btnDel").on("click", function() {
+			/* html 태그의 form 태그를 호출하여 action 속성 값을 변경하고 서버로 데이터 전송 */
+			/* ㄴ 그래서 form 태그에 아이디값 준 것임.. */
+			var frm = $("#frm")[0];
+			/* 원래 폼태그의 action 부분을 주는 것을 여기 자바스크립트에서 내가 원하는 곳으로 지정해서 동적으로 지정할 수 있다. */
+			frm.action = "deleteBoard.do";
+			frm.submit();
+		});
+	});
+	</script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h2>게시글 상세보기</h2>
+		</div>
+		<form id="frm" method="POST">
+			<table class="table table-dark">
+				<tbody>
+					<tr>
+						<td>글 번호</td>
+						<td th:text="${board.boardIdx}"></td>
+						<td>조회수</td>
+						<td th:text="${board.hitCnt}"></td>
+					</tr>
+					<tr>
+						<td>작성자</td>
+						<td th:text="${board.createdId}"></td>
+						<td>작성일</td>
+						<td th:text="${board.createdDatetime}"></td>
+					</tr>
+					<tr>
+						<td>제목</td>
+						<td colspan="3">
+							<input type="text" id="title" name="title" th:value="${board.title}" class="form-control w-100">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<textarea title="내용" id="contents" name="contents" th:text="${board.contents}" class="form-control"></textarea>
+						</td>
+					</tr>
+				</tbody>
+<<<<<<< HEAD
+				<!-- 파일 다운로드 -->
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<!-- href 속성을 이용해서 해당 주소로 이동 -->
+							<!-- 원래는 이동 주소 하나만 입력하는데, 두 개 이상일 경우 아래와 같이 괄호 안에 쉼표로 구분해서 매개변수를 넣고 적어주면 된다. 사용 시 검색해보기 -->
+							<!-- (파라미터명=파라미터값, 파라미터명=파라미터값) 을 사용하면 2 개 이상의 파라미터를 서버로 전송할 수 있음 -->
+							<!-- a 태그의 링크부분을 다운로드 형태로 만든것임 -->
+							<a th:each="list : ${board.fileList}" th:href="@{/board/downloadBoardFile.do(idx=${list.idx}, boardIdx=${list.boardIdx})}" th:text="|${list.originalFileName} (${list.fileSize} p<b)|"></a>
+							<!-- 위의 여러 개 주소는 실제로 다음과 같은 형태의 주소로 사용한다. http://localhost:8000/board/downloadBoardFile.do?idx=10&boardIdx=2 -->
+=======
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<a th:each="list : ${board.fileList}" th:text="|${list.originalFileName}(${list.fileSize} kb)|"></a>
+>>>>>>> branch 'master' of https://github.com/rosybarb51/board1.git
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+			<!-- 아래의 input 덕분에 update와 delete 가능함, hidden 으로 해놔서 화면에는 보이지 않고 서버로는 전송하는 기능임. 여기의 boardIdx를 컨트롤러의 delete 매개변수로 받아옴, th: ${}는 타임리프 표시임, 변수명인 board는 어디서 받아온 것임.. -->
+			<input type="hidden" name="boardIdx" th:value="${board.boardIdx}">
+			<div class="d-flex justify-content-end">
+			<!-- 자바스크립트 사용할 것이니까 id 값도 넣어주기 -->
+				<button type="button" class="btn btn-primary" id="btnList">목록으로</button>
+				<button type="button" class="btn btn-success ml-2" id="btnEdit">수정하기</button>
+				<button type="button" class="btn btn-danger ml-2" id="btnDel">삭제하기</button>
+			</div>
+		</form>
+	</div>
+	
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
