@@ -16,9 +16,6 @@ public class BoardDto {
 	private String updaterId;
 	private String updatedDatetime;
 	private String deletedYn;
-<<<<<<< HEAD
-=======
 //	기존의 BoardDto 클래스는 파일 정보에 대한 멤버 변수가 없으므로 추가함
->>>>>>> branch 'master' of https://github.com/rosybarb51/board1.git
 	private List<BoardFileDto> fileList;
 }

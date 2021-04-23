@@ -33,12 +33,9 @@ public interface BoardMapper {
 //	게시글 삭제하기
 	void deleteBoard(int boardIdx) throws Exception;
 	
-<<<<<<< HEAD
 //	파일 정보 가져오기
 //	@Param 이라고 각각에 하나씩 붙여줘야 인식이 된다, @Param 괄호 안의 값은 밖에서 보이는 키임. 그 다음 나오는 int idx 가 이 안에서 사용하는 것.
 	BoardFileDto selectBoardFileInformation(@Param("idx") int idx, @Param("boardIdx") int boardIdx);
-=======
->>>>>>> branch 'master' of https://github.com/rosybarb51/board1.git
 }
 
 

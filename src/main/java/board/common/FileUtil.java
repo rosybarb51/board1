@@ -14,8 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import board.dto.BoardFileDto;
 
-// @Component - @Bean 어노테이션과 동일하게 Spring IoC 에 등록하여 자동 관리하도록 하는 어노테이션 (인터넷에 @Bean, @Component 검색해서 개념 잘 알아두자), 사용자가 직접 클래스를 생성하여 등록할 경우 @Component를 사용함. @Bean은 미리 만들어진 것 가져다가 쓰는 것이고..
-
+// @Component - @Bean 어노테이션과 동일하게 Spring IoC 에 등록하여 자동 관리하도록 하는 어노테이션, 사용자가 직접 클래스를 생성하여 등록할 경우 @Component를 사용함
 @Component
 public class FileUtil {
 	
@@ -25,29 +24,26 @@ public class FileUtil {
 			return null;
 		}
 		
-//		파일 정보 리스트 
+//		파일 정보 리스트
 		List<BoardFileDto> fileList = new ArrayList<>();
 		
-		
-		////////////// 이미지 저장 폴더 생성 부분
-//		서버에 파일을 저장할 디렉토리 생성
+		///////////  서버에 파일을 저장할 디렉토리 생성
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd"); // 날짜 형식 지정
-		ZonedDateTime current = ZonedDateTime.now(); // 현재 날짜 가져오기
+		ZonedDateTime current = ZonedDateTime.now(); // 현재 날짜시간 가져오기
 		
-//		이미지 저장 폴더명 설정 (예 : images/20210316 )
+//		이미지 저장 폴더명 설정 (예 : images/20210316)
 		String path = "images/" + current.format(format);
 		
-//		FIle 클래스를 통해서 실제 폴더 생성
+//		File 클래스를 통해서 실제 폴더 생성
 		File file = new File(path);
 //		기존에 동일한 폴더가 존재하는지 확인
 		if (file.exists() == false) {
 			file.mkdirs(); // 폴더 생성
 		}
-		////////////// 이미지 저장 폴더 생성 부분
-		
+		///////////  이미지 저장 폴더 생성 부분
 		
 		Iterator<String> iterator = uploadFiles.getFileNames();
-	
+		
 		String newFileName, oriFileExtension, contentType;
 		
 		while (iterator.hasNext()) {
@@ -57,6 +53,7 @@ public class FileUtil {
 				if (multiFile.isEmpty() == false) {
 					contentType = multiFile.getContentType();
 					
+//					파일 확장자 확인하기
 					if (ObjectUtils.isEmpty(contentType)) {
 						break;
 					}
@@ -75,8 +72,7 @@ public class FileUtil {
 						}
 					}
 					
-					
-//					업로드된 파일의 이름을 변경 / 서버에 여러 사람이 접속하여 동시에 파일을 업로드할 경우 파일명이 겹칠 수 있기 때문에 날짜, 시간을 사용하여 파일 이름을 겹치지 않도록 함
+//					업로드된 파일의 이름을 변경 / 서버에 여러 사람이 접속하여 동시에 파일을 업로드할 경우 파일명이 겹칠 수 있기 때문에 날짜, 시간을 사용하여 파일을 이름을 겹치지 않도록 함
 					newFileName = Long.toString(System.nanoTime()) + oriFileExtension;
 					BoardFileDto boardFile = new BoardFileDto();
 					boardFile.setBoardIdx(boardIdx);
@@ -85,7 +81,7 @@ public class FileUtil {
 					boardFile.setStoredFilePath(path + "/" + newFileName);
 					fileList.add(boardFile);
 					
-// 					서버에 업로드된 파일을 실제로 저장
+//					서버에 업로드된 파일을 실제로 저장
 					file = new File(path + "/" + newFileName);
 					multiFile.transferTo(file);
 				}
@@ -94,6 +90,12 @@ public class FileUtil {
 		
 		return fileList;
 	}
-	}
-
 }
+
+
+
+
+
+
+
+

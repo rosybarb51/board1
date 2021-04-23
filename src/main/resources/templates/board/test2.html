@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>마이 페이지</title>
+
+<link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+<script src="/js/jquery-3.5.1.js" th:src="@{/js/jquery-3.5.1.js}"></script>
+<script src="/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+<style>
+	input {
+		width: 100%;
+		border-radius: 20px;
+		border: 1px solid #bbb;
+		margin: 10px 0;
+		padding: 10px 12px;
+		font-family: fontAwesome;
+	}
+	
+	.dropdown-menu {
+		display: none;
+		position: absolute;
+		background-color: #f1f1f1;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		z-index: 1;
+	}
+
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+	
+	.dropbtn {
+	/* 	color: white; */
+		font-size: 2rem;
+		border: none;
+	}
+	
+	.dropdown:hover .dropdown-menu {
+		display: block;
+	}
+	
+	.box {
+	width: 150px;
+	height: 150px; 
+	border-radius: 70%;
+	overflow: hidden;
+	}
+	
+	.profile {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.sidenav {
+		height: 80%;
+		width: 0%;
+		z-index: 1;
+		left: 0;
+		background-color: #FFC300;
+		overflow-x: hidden;
+		transition: 0s;
+		padding-top: 40%;
+		padding-bottom: 100%;
+	}
+
+	.sidenav a {
+		padding: 8px 8px 8px 32px;
+		text-decoration: none;
+		font-size: 25px;
+		color: #818181;
+		display: block;
+		transition: 0s;
+	}
+
+	.sidenav a:hover {
+		color: #f1f1f1;
+	}
+
+	.sidenav .closebtn {
+		right: 10%;
+		font-size: 40px;
+		margin-left: 60%;
+	}
+
+	 .menuMark {
+		position: absolute;
+		top: 5%;
+		font-size: 36px;
+		margin-left: 10%;
+	} 
+
+	.menuMark span:hover {
+		color: #f1f1f1;
+	}
+	
+	#footer {
+		position:absolute;
+		width: 100%;
+		height: 10%;
+		text-align: center;
+		color: light;
+	}
+	
+
+	@media all and (min-width:480px) and (max-width:767px) { 
+		.sidenav {
+			height: 80%;
+			width: 0%;
+			z-index: 1;
+			left: 0;
+			background-color: #FFC300;
+			overflow-x: hidden;
+			transition: 0s;
+			padding-top: 0%;
+			padding-bottom: 0%;
+		}
+	}
+</style>
+
+</head>
+
+<body>
+	<header class="bg-whight">
+		<div class="row">
+			<div class="text-center d-flex justify-content-center mt-4 search-bar input-group mb-3">
+				<div class="col-sm-2">
+					<a class="display-4 text-warning"
+						style="font-size: 2.5em; font-weight: bold; text-decoration: none;"
+						href="/second">HOME recipe</a>
+				</div>
+	
+				<div class="col-sm-6">
+					<form action="" method="GET" class="form-group">
+						<div class="input-group">
+							<input name="" type="search" class="form-control"
+								placeholder="&#xf002; Search...">
+
+							<button type="submit" class="btn btn-outline-danger"
+								style="border: 0;">
+								<i class="fas fa-search" style="font-size: 1.5em;"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="input-group-append col-sm-2 ">
+					<a href="/second/SecondIcon1" class="text-dark"
+						style="font-size: 2.5em; font-weight: bold; text-decoration: none;">
+						<i class="far fa-user ml-5"></i>
+					</a> <a href="/second/secondDetail" class="text-dark"
+						style="font-size: 2.5em; font-weight: bold; text-decoration: none;">
+						<i class="far fa-edit ml-5"></i>
+					</a> <a href="#" class="text-dark"
+						style="font-size: 2.5em; font-weight: bold; text-decoration: none;">
+						<i class="fas fa-book ml-5"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+<div class="bg-danger">
+			<div class="container">
+				<nav class="topnav d-flex justify-content-center" id="myTopnav">
+					<div class="dropdown px-5">
+						<button id="btn1" class="dropbtn btn btn-danger " data-toggle="dropdown">목록</button>
+						<div class="dropdown-menu ">
+							<a href="#" class="dropdown-item">홈</a> 
+							<a href="#"	class="dropdown-item">회사소개</a> 
+							<a href="#" class="dropdown-item">제품소개</a>
+							<a href="#" class="dropdown-item">오시는길</a>
+						</div>
+					</div>
+					<div class="dropdown px-5">
+						<button class="dropbtn btn btn-danger" data-toggle="dropdown">찌게</button>
+						<div class="dropdown-menu">
+							<a href="#" class="dropdown-item">홈</a> 
+							<a href="#"	class="dropdown-item">회사소개</a> 
+							<a href="#" class="dropdown-item">제품소개</a>
+							<a href="#" class="dropdown-item">오시는길</a>
+						</div>
+					</div>
+					<div class="dropdown px-5">
+						<button class="dropbtn btn btn-danger" data-toggle="dropdown">구이</button>
+						<div class="dropdown-menu">
+							<a href="#" class="dropdown-item">홈</a> 
+							<a href="#" class="dropdown-item">회사소개</a> 
+							<a href="#" class="dropdown-item">제품소개</a>
+							<a href="#" class="dropdown-item">오시는길</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+	</header>
+	
+	<main class="pt-4">
+		<div class="container" style="background-color: #f2f2f2;">
+			<div class="row wrapper">
+				<!-- 사이드바 -->
+				<div class="col-md-3 bg-warning" id="sidebar">
+					<div class="content ml-4 mr-4">
+						<div>
+							<h4 class="pt-5 text-white"><strong>마이페이지</strong></h4>
+						</div>
+						<hr class="bg-white">
+						
+						<a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="closeNav()">&times;</a>
+						<!-- 내 프로필 링크 -->
+						<a href="/second/mypage" class="form-inline">
+							<svg xmlns="http://www.w3.org/2000/svg" width="28" height="26" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+							<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+							</svg>
+							<span class="m-0 pl-3" id="menuSpan1" style="display: none;">내 프로필</span>
+						</a>
+								<a href="/second/myBoard" class="form-inline pt-4">
+									<svg xmlns="http://www.w3.org/2000/svg" width="28" height="25" fill="currentColor" class="bi bi-journal" viewBox="0 0 16 16">
+										 <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+										 <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+									</svg>
+									<span class="m-0 pl-3" id="menuSpan2" style="display: none;">내 글 관리</span>
+								</a>
+								<div th:if="${session.userLevel} == A">
+									<a href="/second/adminPage" class="form-inline pt-4" >
+									<svg xmlns="http://www.w3.org/2000/svg" width="28" height="25" fill="currentColor" 										class="bi bi-people-fill" viewBox="0 0 16 16">
+  										<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+  <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+  <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+</svg>
+									<h4 class="m-0 pl-3" th:text="회원관리"></h4>
+								</a>
+								</div>
+							</div>
+				</div>
+				<div class="col-md-9">
+					<div class="p-4">
+					<a class="menuMark ml-4 text-white" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</a>
+						<h4 class="pt-5"><strong th:text="|${session.userId}|"></strong> 님의 마이페이지</h4><hr>
+					</div>
+					
+					<div class="row ml-1 mr-1 mb-5" style="border: 1px solid gray;">
+						<div class="col-md-4" style="border-right: 1px solid gray;">
+						<div class="box" style="background: #BDBDBD;">
+							<img class="profile" src="/images/tistory.JPG">
+						</div>
+						</div>
+						<div class="col-md-8 pt-4 pb-4">
+							<h4>나의 소개</h4>
+							<h5 th:text="|${session.userComment}|"></h5>
+						</div>
+					</div>
+					
+					<div>
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<th scope="row" class="align-middle text-center" style="width:34%;">생년월일</th>
+									<td style="width:66%;"><p class="align-middle text-center m-0" th:text="|${session.userYear}|"></p></td>
+								</tr>
+								<tr>
+									<th scope="row" class="align-middle text-center">휴대폰</th>
+									<td><p class="align-middle text-center m-0" th:text="|${session.userPhone}|"></p></td>
+								</tr>
+								<tr>
+									<th scope="row" class="align-middle text-center">성별</th>
+									<td><p class="align-middle text-center m-0" th:text="|${session.userGender}|"></p></td>
+								</tr>
+								
+							</tbody>
+						</table>
+						<div class="mt-4">
+							<a href="/second/mypageUpdate" class="btn btn-light float-right pl-3 pr-3" style="border: 1px solid black;"><strong>수정</strong></a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	
+	<footer>
+	
+	</footer>
+	
+	<script>
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "100%";
+			$('#menuSpan1').css("display","inline-block");
+			$('#menuSpan2').css("display", "inline-block");
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0%";
+			$('#menuSpan1').css("display","none");
+			$('#menuSpan2').css("display", "none");
+		}
+		</script>
+</body>
+</html>
